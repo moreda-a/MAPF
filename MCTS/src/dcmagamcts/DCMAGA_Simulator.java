@@ -30,8 +30,8 @@ public class DCMAGA_Simulator extends Simulator {
 		ArrayList<Action> acs = new ArrayList<Action>();
 		for (int i = -1; i < 2; ++i)
 			for (int j = (i == 0 ? -1 : 0); j < (i == 0 ? 2 : 1); ++j)
-				if (st.lastMove[st.nextColor].first + i >= 0 && st.lastMove[st.nextColor].first + i < st.size
-						&& st.lastMove[st.nextColor].second + j >= 0 && st.lastMove[st.nextColor].second + j < st.size
+				if (st.lastMove[st.nextColor].first + i >= 0 && st.lastMove[st.nextColor].first + i < st.width
+						&& st.lastMove[st.nextColor].second + j >= 0 && st.lastMove[st.nextColor].second + j < st.height
 						&& st.table[st.lastMove[st.nextColor].first + i][st.lastMove[st.nextColor].second + j] == 0)
 					acs.add(new DCMAGA_Action(st.lastMove[st.nextColor].second + j, st.lastMove[st.nextColor].first + i,
 							st.nextColor));
@@ -43,8 +43,8 @@ public class DCMAGA_Simulator extends Simulator {
 		ArrayList<Action> acs = new ArrayList<Action>();
 		for (int i = -1; i < 2; ++i)
 			for (int j = (i == 0 ? -1 : 0); j < (i == 0 ? 2 : 1); ++j)
-				if (st.lastMove[st.nextColor].first + i >= 0 && st.lastMove[st.nextColor].first + i < st.size
-						&& st.lastMove[st.nextColor].second + j >= 0 && st.lastMove[st.nextColor].second + j < st.size
+				if (st.lastMove[st.nextColor].first + i >= 0 && st.lastMove[st.nextColor].first + i < st.width
+						&& st.lastMove[st.nextColor].second + j >= 0 && st.lastMove[st.nextColor].second + j < st.height
 						&& st.table[st.lastMove[st.nextColor].first + i][st.lastMove[st.nextColor].second + j] == 0)
 					acs.add(new DCMAGA_Action(st.lastMove[st.nextColor].second + j, st.lastMove[st.nextColor].first + i,
 							st.nextColor));

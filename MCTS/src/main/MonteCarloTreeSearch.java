@@ -13,7 +13,7 @@ public class MonteCarloTreeSearch extends TreeSolver {
 		root.reset();
 		int time = 2000;
 		while (time-- > 0) {
-			if (Main.gcIsOn)
+			if (Main.garbageCollectorMode)
 				System.gc();
 			State leaf = selection(root);
 			State expandedLeaf = expansion(leaf);
@@ -85,7 +85,7 @@ public class MonteCarloTreeSearch extends TreeSolver {
 		Value vbest = null;
 		for (State ch : childs) {
 			Value vv = ch.value;
-			if (Main.debug)
+			if (Main.debugMode)
 				System.out.println("CH:\n" + ch + vv);
 			if (vbest == null || vbest.compareTo(vv) < 0) {
 				vbest = vv;

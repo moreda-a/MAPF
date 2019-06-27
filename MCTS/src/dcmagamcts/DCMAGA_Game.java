@@ -6,8 +6,7 @@ public class DCMAGA_Game extends Game {
 
 	@Override
 	public void init() {
-		// myState = new SPF_State();
-		myState = new DCMAGA_State("testcase10.txt");
+		myState = new DCMAGA_State("dcmagamcts\\testcase-1.txt");
 	}
 
 }

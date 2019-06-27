@@ -187,7 +187,7 @@ public class SPF_State extends State {
 		File file = new File("testcase\\" + str);
 		try {
 			Scanner sc;
-			if (Main.sysIn)
+			if (Main.systemInput)
 				sc = new Scanner(System.in);
 			else
 				sc = new Scanner(file);
