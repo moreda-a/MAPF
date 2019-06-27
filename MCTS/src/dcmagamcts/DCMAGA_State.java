@@ -46,6 +46,8 @@ public class DCMAGA_State extends State {
 	public int nextColor;
 	public int lastColor;
 
+	public int myNumber = -1;
+
 	public PII[] lastMove;
 	public PII[] target;
 
@@ -225,6 +227,78 @@ public class DCMAGA_State extends State {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public DCMAGA_State(String str, int mynum) {
+		File file = new File("testcase\\" + str);
+		try {
+			Scanner sc;
+			if (Main.systemInput)
+				sc = new Scanner(System.in);
+			else
+				sc = new Scanner(file);
+			width = sc.nextInt();
+			height = sc.nextInt();
+			playerNumber = sc.nextInt();
+			goalNumber = sc.nextInt();
+			table = new int[width][height];
+			lastMove = new PII[playerNumber + 1];
+			target = new PII[playerNumber + 1];
+			for (int i = 1; i <= playerNumber; ++i) {
+				lastMove[i] = null;
+				target[i] = null;
+			}
+			for (int i = 0; i < width; ++i)
+				for (int j = 0; j < height; ++j) {
+					table[i][j] = sc.nextInt();
+					if (table[i][j] != 0)
+						if (lastMove[table[i][j]] == null)
+							lastMove[table[i][j]] = new PII(i, j);
+					// else
+					// target[table[i][j]] = new PII(i, j);
+				}
+			lastColor = playerNumber;
+			setNextColor();
+			parent = null;
+			lastColor = -1;
+			sc.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		myNumber = mynum;
+	}
+
+	public DCMAGA_State(State[] agentState, State[] gg) {
+		DCMAGA_State st = (DCMAGA_State) agentState[1];
+		width = st.width;
+		height = st.height;
+		playerNumber = st.playerNumber;
+		table = new int[width][height];
+		lastMove = new PII[playerNumber + 1];
+		target = new PII[playerNumber + 1];
+		for (int i = 1; i <= playerNumber; ++i) {
+			lastMove[i] = st.lastMove[i];
+			target[i] = st.target[i];
+		}
+		for (int i = 0; i < width; ++i)
+			for (int j = 0; j < height; ++j)
+				table[i][j] = st.table[i][j];
+		for (int i = 1; i <= playerNumber; ++i) {
+			int help = table[((DCMAGA_State) gg[i]).lastMove[i].first][((DCMAGA_State) gg[i]).lastMove[i].second];
+			if (((DCMAGA_State) gg[i]).lastMove[i] != lastMove[i] && help <= 0) {
+				table[lastMove[i].first][lastMove[i].second] = 0;
+				table[((DCMAGA_State) gg[i]).lastMove[i].first][((DCMAGA_State) gg[i]).lastMove[i].second] = help == -1
+						? -i - 1
+						: i;
+				lastMove[i] = ((DCMAGA_State) gg[i]).lastMove[i];
+			}
+		}
+		// table[act.y][act.x] = act.color;
+		// lastMove[act.color] = new PII(act.y, act.x);
+		parent = st;
+		lastColor = st.nextColor;
+		setNextColor();
+		depth = st.depth + 1;
 	}
 
 	@Override

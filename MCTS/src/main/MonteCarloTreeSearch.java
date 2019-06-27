@@ -2,6 +2,11 @@ package main;
 
 import java.util.*;
 
+import dcmagamcts.DCMAGA_Game;
+import dcmagamcts.DCMAGA_State;
+import spf.SPF_State;
+import xo.XO_State;
+
 public class MonteCarloTreeSearch extends TreeSolver {
 
 	public MonteCarloTreeSearch(Game game, Simulator simulator) {
@@ -10,6 +15,19 @@ public class MonteCarloTreeSearch extends TreeSolver {
 
 	@Override
 	public State getBestNextState(State root) {
+		if (root.getClass() == SPF_State.class || root.getClass() == XO_State.class)
+			return getBestNextStateSingle(root);
+		else {
+			DCMAGA_State st = (DCMAGA_State) root;
+			State[] gg = new State[st.playerNumber + 1];
+			DCMAGA_Game ga = (DCMAGA_Game) game;
+			for (int i = 1; i <= st.playerNumber; ++i)
+				gg[i] = getBestNextStateSingle(ga.agentState[i]);
+			return new DCMAGA_State(ga.agentState, gg);
+		}
+	}
+
+	public State getBestNextStateSingle(State root) {
 		root.reset();
 		int time = 2000;
 		while (time-- > 0) {
