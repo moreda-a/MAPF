@@ -15,16 +15,20 @@ public class MonteCarloTreeSearch extends TreeSolver {
 
 	@Override
 	public State getBestNextState(State root) {
-		if (root.getClass() == SPF_State.class || root.getClass() == XO_State.class)
+		if (game.Centralized)
 			return getBestNextStateSingle(root);
-		else {
-			DCMAGA_State st = (DCMAGA_State) root;
-			State[] gg = new State[st.playerNumber + 1];
-			DCMAGA_Game ga = (DCMAGA_Game) game;
-			for (int i = 1; i <= st.playerNumber; ++i)
-				gg[i] = getBestNextStateSingle(ga.agentState[i]);
-			return new DCMAGA_State(ga.agentState, gg);
-		}
+		else
+			return getBestNextStateMulti(root);
+
+	}
+
+	public State getBestNextStateMulti(State root) {
+		DCMAGA_State st = (DCMAGA_State) root;
+		State[] gg = new State[st.playerNumber + 1];
+		DCMAGA_Game ga = (DCMAGA_Game) game;
+		for (int i = 1; i <= st.playerNumber; ++i)
+			gg[i] = getBestNextStateSingle(ga.agentState[i]);
+		return new DCMAGA_State(ga.agentState, gg);
 	}
 
 	public State getBestNextStateSingle(State root) {

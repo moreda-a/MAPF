@@ -8,6 +8,7 @@ public class DCMAGA_Game extends Game {
 
 	@Override
 	public void init() {
+		Centralized = false;
 		myState = new DCMAGA_State("dcmagamcts\\testcase-1.txt", 1);
 		DCMAGA_State ms = (DCMAGA_State) myState;
 		agentState = new State[ms.playerNumber + 1];

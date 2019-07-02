@@ -2,6 +2,7 @@ package main;
 
 public abstract class Game {
 
+	protected boolean Centralized;
 	protected State myState;
 
 	public abstract void init();

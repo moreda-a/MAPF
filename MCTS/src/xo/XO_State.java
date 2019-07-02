@@ -97,11 +97,11 @@ public class XO_State extends State {
 				|| (table[0][0] == 2 && table[1][1] == 2 && table[2][2] == 2)
 				|| (table[0][2] == 2 && table[1][1] == 2 && table[2][0] == 2);
 		if (is1win)
-			return Value.win();
+			return XO_Value.win();
 		else if (is2win)
-			return Value.lose();
+			return XO_Value.lose();
 		else
-			return Value.draw();
+			return XO_Value.draw();
 	}
 
 	@Override

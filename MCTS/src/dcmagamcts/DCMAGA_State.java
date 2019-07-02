@@ -100,20 +100,20 @@ public class DCMAGA_State extends State {
 		for (int i = 1; i <= playerNumber; ++i) {
 			nextColor = (lastColor + i - 1) % playerNumber + 1;
 			int cn = childNumber();
-			int cnt = childNumberTarget();
-			if (isNear(nextColor) || cn == 0 || cnt == 0)
+			// int cnt = childNumberTarget();
+			if (isNear(nextColor) || cn == 0)
 				continue;
 			if (cn == 1) {
 				bestColor = nextColor;
 				break;
 			}
-			if (cnt == 1) {
-				bestColor = nextColor;
-				PII temp = lastMove[nextColor];
-				lastMove[nextColor] = target[nextColor];
-				target[nextColor] = temp;
-				break;
-			}
+//			if (cnt == 1) {
+//				bestColor = nextColor;
+//				PII temp = lastMove[nextColor];
+//				lastMove[nextColor] = target[nextColor];
+//				target[nextColor] = temp;
+//				break;
+//			}
 			// double gn = cn - dis(nextColor) / size * 2;
 			if (best > cn) {
 				best = cn;
@@ -133,8 +133,9 @@ public class DCMAGA_State extends State {
 	}
 
 	private boolean isNear(int color) {
-		return Math.abs(lastMove[color].first - target[color].first)
-				+ Math.abs(lastMove[color].second - target[color].second) == 1;
+		// return Math.abs(lastMove[color].first - target[color].first)
+		// + Math.abs(lastMove[color].second - target[color].second) == 1;
+		return table[lastMove[color].first][lastMove[color].first] <= 0;
 	}
 
 	public DCMAGA_State() {
@@ -251,7 +252,7 @@ public class DCMAGA_State extends State {
 			for (int i = 0; i < width; ++i)
 				for (int j = 0; j < height; ++j) {
 					table[i][j] = sc.nextInt();
-					if (table[i][j] != 0)
+					if (table[i][j] != 0 && table[i][j] != -1)
 						if (lastMove[table[i][j]] == null)
 							lastMove[table[i][j]] = new PII(i, j);
 					// else
@@ -285,7 +286,7 @@ public class DCMAGA_State extends State {
 				table[i][j] = st.table[i][j];
 		for (int i = 1; i <= playerNumber; ++i) {
 			int help = table[((DCMAGA_State) gg[i]).lastMove[i].first][((DCMAGA_State) gg[i]).lastMove[i].second];
-			if (((DCMAGA_State) gg[i]).lastMove[i] != lastMove[i] && help <= 0) {
+			if (((DCMAGA_State) gg[i]).lastMove[i] != lastMove[i] && help == 0 || help == -1) {
 				table[lastMove[i].first][lastMove[i].second] = 0;
 				table[((DCMAGA_State) gg[i]).lastMove[i].first][((DCMAGA_State) gg[i]).lastMove[i].second] = help == -1
 						? -i - 1
@@ -325,7 +326,7 @@ public class DCMAGA_State extends State {
 			m[i] = isNear(i);
 		}
 
-		return new Value(-1, res / playerNumber, m);
+		return new DCMAGA_Value(-1, res / playerNumber, m);
 	}
 
 	@Override
@@ -363,6 +364,7 @@ public class DCMAGA_State extends State {
 	}
 
 	private int childNumber() {
+		// System.out.println(lastMove[1]);
 		int ans = 0;
 		for (int i = -1; i < 2; ++i)
 			for (int j = (i == 0 ? -1 : 0); j < (i == 0 ? 2 : 1); ++j)
@@ -373,14 +375,14 @@ public class DCMAGA_State extends State {
 		return ans;
 	}
 
-	private int childNumberTarget() {
-		PII temp = lastMove[nextColor];
-		lastMove[nextColor] = target[nextColor];
-		target[nextColor] = temp;
-		int res = childNumber();
-		temp = lastMove[nextColor];
-		lastMove[nextColor] = target[nextColor];
-		target[nextColor] = temp;
-		return res;
-	}
+//	private int childNumberTarget() {
+//		PII temp = lastMove[nextColor];
+//		lastMove[nextColor] = target[nextColor];
+//		target[nextColor] = temp;
+//		// int res = childNumber();
+//		temp = lastMove[nextColor];
+//		lastMove[nextColor] = target[nextColor];
+//		target[nextColor] = temp;
+//		return res;
+//	}
 }

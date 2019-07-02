@@ -242,7 +242,7 @@ public class SPF_State extends State {
 			m[i] = isNear(i);
 		}
 
-		return new Value(-1, res / playerNumber, m);
+		return new SPF_Value(-1, res / playerNumber, m);
 	}
 
 	@Override
