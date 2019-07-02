@@ -7,6 +7,8 @@ public abstract class Game {
 
 	public abstract void init();
 
+	public abstract Value CreateZeroValue();
+
 	public boolean notEnded() {
 		return myState.isNotTerminal();
 	}

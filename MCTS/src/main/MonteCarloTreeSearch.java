@@ -59,7 +59,7 @@ public class MonteCarloTreeSearch extends TreeSolver {
 		State st = state;
 		if (!st.isInTree) {
 			st.isInTree = true;
-			st.value = new Value(0, 0);
+			st.value = game.CreateZeroValue();
 		} else if (state.isNotTerminal()) {
 			System.out.println("---WTF---");
 			// state = simulator.randomChild(state);

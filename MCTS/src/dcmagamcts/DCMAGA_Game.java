@@ -18,4 +18,9 @@ public class DCMAGA_Game extends Game {
 		}
 	}
 
+	@Override
+	public Value CreateZeroValue() {
+		return new DCMAGA_Value(0, 0);
+	}
+
 }

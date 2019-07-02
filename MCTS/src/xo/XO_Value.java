@@ -1,6 +1,7 @@
 package xo;
 
 import main.*;
+import spf.SPF_State;
 
 public class XO_Value extends Value {
 	static int modelNumber = 1;
@@ -59,7 +60,39 @@ public class XO_Value extends Value {
 	}
 
 	@Override
+	public Value update(State state, Value simulationResult) {
+		SPF_State st = (SPF_State) state;
+		XO_Value simulation_result = (XO_Value) simulationResult;
+		++num;
+		bestValue = Math.max(value, simulation_result.value - (st.lastColor != -1
+				? simulation_result.mark[st.lastColor] ? (double) (3 - modelNumber / 2) * (1 / st.playerNumber) : 0
+				: 0));
+		switch (modelNumber) {
+		case 1:
+		case 2:
+		case 3:
+			value = (value * (num - 1) + simulation_result.value
+					- (st.lastColor != -1
+							? simulation_result.mark[st.lastColor]
+									? (double) (1.5 - modelNumber / 2) * (1 / st.playerNumber)
+									: 0
+							: 0))
+					/ num;
+			break;
+		case 4:
+		case 5:
+		case 6:
+			value = bestValue;
+			break;
+		default:
+			break;
+		}
+		return this;
+	}
+
+	@Override
 	public String toString() {
 		return "{num: " + num + ", value: " + value + ", maxValue: " + bestValue + "}";
 	}
+
 }

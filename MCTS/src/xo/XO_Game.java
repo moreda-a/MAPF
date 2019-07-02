@@ -10,4 +10,9 @@ public class XO_Game extends Game {
 		myState = new XO_State();
 	}
 
+	@Override
+	public Value CreateZeroValue() {
+		return new XO_Value(0, 0);
+	}
+
 }

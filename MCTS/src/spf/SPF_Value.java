@@ -58,8 +58,10 @@ public class SPF_Value extends Value {
 			return 1;
 	}
 
-	public SPF_Value update(State state, SPF_Value simulation_result) {
+	@Override
+	public SPF_Value update(State state, Value simulationResult) {
 		SPF_State st = (SPF_State) state;
+		SPF_Value simulation_result = (SPF_Value) simulationResult;
 		++num;
 		bestValue = Math.max(value, simulation_result.value - (st.lastColor != -1
 				? simulation_result.mark[st.lastColor] ? (double) (3 - modelNumber / 2) * (1 / st.playerNumber) : 0

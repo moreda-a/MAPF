@@ -11,4 +11,9 @@ public class SPF_Game extends Game {
 		myState = new SPF_State("testcase10.txt");
 	}
 
+	@Override
+	public Value CreateZeroValue() {
+		return new SPF_Value(0, 0);
+	}
+
 }
