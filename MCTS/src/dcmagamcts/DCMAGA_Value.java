@@ -3,7 +3,6 @@ package dcmagamcts;
 import main.*;
 
 public class DCMAGA_Value extends Value {
-	static int modelNumber = 1;
 
 	public DCMAGA_Value(int num, double value) {
 		super(num, value);
@@ -45,9 +44,15 @@ public class DCMAGA_Value extends Value {
 		DCMAGA_Value simulation_result = (DCMAGA_Value) simulationResult;
 		++num;
 		// TODO change ?
-		bestValue = Math.max(bestValue, simulation_result.value - (st.lastColor != -1
-				? simulation_result.mark[st.lastColor] ? (double) (3 - modelNumber / 2) * (1 / st.playerNumber) : 0
-				: 0));
+		// modelNumber = 3;
+		bestValue = Math.max(bestValue,
+				simulation_result.value
+						- (st.lastColor != -1
+								? simulation_result.mark[st.lastColor]
+										? (double) (1.5 - (double) (((modelNumber - 1) % 3) + 1) / 2)
+												* (1 / st.playerNumber)
+										: 0
+								: 0));
 		switch (modelNumber) {
 		case 1:
 		case 2:
@@ -59,8 +64,9 @@ public class DCMAGA_Value extends Value {
 									: 0
 							: 0))
 					/ num;
-			if (value < 0)
-				System.out.println("dibz");
+//			if (simulation_result.value > 0)
+//				System.out.println("dibz:" + simulation_result.value + " - "
+//						+ ((double) (1.5 - (double) modelNumber / 2) * (1 / st.playerNumber)));
 			break;
 		case 4:
 		case 5:

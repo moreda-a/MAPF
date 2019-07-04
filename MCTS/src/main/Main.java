@@ -85,6 +85,7 @@ public class Main {
 		}
 		System.out.println("FinalState: \n" + game.getState());
 		System.out.println("ModelNUmber: " + Value.modelNumber + " Time: " + (System.currentTimeMillis() - startTimes)
-				+ " Ratio: " + game.getState().value);
+				+ " Ratio: " + game.getState().getValue() + " Depth: " + game.getState().depth);
+		// TODO or value ?
 	}
 }

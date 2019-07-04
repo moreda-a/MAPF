@@ -1,8 +1,8 @@
 false
 false
-true
+false
 DCMAGAMCTS
-dcmagamcts\\testcase-2.txt
+dcmagamcts\\testcase-6.txt
 false
 false
 false

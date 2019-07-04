@@ -230,7 +230,7 @@ public class DCMAGA_State extends State {
 		if (!hasChild())
 			return false;
 		// TODO Yeah ? :D
-		if (depth >= width + height)
+		if (depth >= 3 * (width + height) / 2)
 			return false;
 		return true;
 	}
