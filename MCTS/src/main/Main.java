@@ -13,6 +13,7 @@ public class Main {
 	public static boolean garbageCollectorMode;
 	public static boolean debugMode;
 	public static String gameName;
+	public static String testCase;
 
 	public static void main(String[] args) {
 		getConfiguration();
@@ -61,6 +62,7 @@ public class Main {
 			garbageCollectorMode = sc.nextBoolean();
 			debugMode = sc.nextBoolean();
 			gameName = sc.next();
+			testCase = sc.next();
 			sc.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

@@ -3,10 +3,10 @@ package main;
 public abstract class Value {
 	static int modelNumber = 1;
 
-	int num;
-	double value;
-	double bestValue;
-	boolean mark[];
+	protected int num;
+	protected double value;
+	protected double bestValue;
+	protected boolean mark[];
 
 	public Value(int num, double value) {
 		this.num = num;
@@ -53,6 +53,7 @@ public abstract class Value {
 			return 1;
 	}
 
+	// TODO bug in value cast to double make it negative
 	public abstract Value update(State state, Value simulationResult);
 
 	@Override

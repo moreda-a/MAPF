@@ -2,10 +2,7 @@ package main;
 
 import java.util.*;
 
-import dcmagamcts.DCMAGA_Game;
-import dcmagamcts.DCMAGA_State;
-import spf.SPF_State;
-import xo.XO_State;
+import dcmagamcts.*;
 
 public class MonteCarloTreeSearch extends TreeSolver {
 
@@ -25,10 +22,18 @@ public class MonteCarloTreeSearch extends TreeSolver {
 	public State getBestNextStateMulti(State root) {
 		DCMAGA_State st = (DCMAGA_State) root;
 		State[] gg = new State[st.playerNumber + 1];
+		State[] ng = new State[st.playerNumber + 1];
 		DCMAGA_Game ga = (DCMAGA_Game) game;
-		for (int i = 1; i <= st.playerNumber; ++i)
+		for (int i = 1; i <= st.playerNumber; ++i) {
+			((DCMAGA_State) ga.agentState[i]).nextColor = i;
 			gg[i] = getBestNextStateSingle(ga.agentState[i]);
-		return new DCMAGA_State(ga.agentState, gg);
+		}
+		for (int i = 1; i <= st.playerNumber; ++i) {
+			ng[i] = new DCMAGA_State(ga.agentState, gg);
+			((DCMAGA_State) ng[i]).myNumber = i;
+		}
+		ga.agentState = ng;
+		return ng[1];
 	}
 
 	public State getBestNextStateSingle(State root) {

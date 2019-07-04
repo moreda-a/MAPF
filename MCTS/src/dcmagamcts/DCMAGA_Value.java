@@ -5,15 +5,8 @@ import main.*;
 public class DCMAGA_Value extends Value {
 	static int modelNumber = 1;
 
-	int num;
-	double value;
-	double bestValue;
-	boolean mark[];
-
 	public DCMAGA_Value(int num, double value) {
-		this.num = num;
-		this.value = value;
-		bestValue = value;
+		super(num, value);
 	}
 
 	public DCMAGA_Value(int i, double d, boolean[] m) {
@@ -51,7 +44,8 @@ public class DCMAGA_Value extends Value {
 		DCMAGA_State st = (DCMAGA_State) state;
 		DCMAGA_Value simulation_result = (DCMAGA_Value) simulationResult;
 		++num;
-		bestValue = Math.max(value, simulation_result.value - (st.lastColor != -1
+		// TODO change ?
+		bestValue = Math.max(bestValue, simulation_result.value - (st.lastColor != -1
 				? simulation_result.mark[st.lastColor] ? (double) (3 - modelNumber / 2) * (1 / st.playerNumber) : 0
 				: 0));
 		switch (modelNumber) {
@@ -61,10 +55,12 @@ public class DCMAGA_Value extends Value {
 			value = (value * (num - 1) + simulation_result.value
 					- (st.lastColor != -1
 							? simulation_result.mark[st.lastColor]
-									? (double) (1.5 - modelNumber / 2) * (1 / st.playerNumber)
+									? (double) (1.5 - (double) modelNumber / 2) * (1 / st.playerNumber)
 									: 0
 							: 0))
 					/ num;
+			if (value < 0)
+				System.out.println("dibz");
 			break;
 		case 4:
 		case 5:
