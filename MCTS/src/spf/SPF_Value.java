@@ -3,13 +3,8 @@ package spf;
 import main.*;
 
 public class SPF_Value extends Value {
-	static int modelNumber = 1;
-
-	int num;
-	double value;
-	double bestValue;
-	boolean mark[];
-
+	
+	
 	public SPF_Value(int num, double value) {
 		this.num = num;
 		this.value = value;
