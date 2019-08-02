@@ -8,7 +8,7 @@ public class SPF_Game extends Game {
 	public void init() {
 		Centralized = true;
 		// myState = new SPF_State();
-		myState = new SPF_State("testcase10.txt");
+		myState = new SPF_State("testcase4.txt");
 	}
 
 	@Override

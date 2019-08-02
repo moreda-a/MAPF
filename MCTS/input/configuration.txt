@@ -1,8 +1,8 @@
 false
 false
-true
+false
 SPF
-testcase10.txt
+testcase4.txt
 
 
 
